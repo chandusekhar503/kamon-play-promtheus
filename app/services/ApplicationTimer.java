@@ -4,6 +4,10 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
 import javax.inject.*;
+
+import kamon.Kamon;
+import kamon.prometheus.PrometheusReporter;
+import kamon.system.SystemMetrics;
 import play.Logger;
 import play.inject.ApplicationLifecycle;
 
@@ -38,8 +42,13 @@ public class ApplicationTimer {
 
         // When the application starts, register a stop hook with the
         // ApplicationLifecycle object. The code inside the stop hook will
+
+        SystemMetrics.startCollecting();
+
+
         // be run when the application stops.
         appLifecycle.addStopHook(() -> {
+            SystemMetrics.stopCollecting();
             Instant stop = clock.instant();
             Long runningTime = stop.getEpochSecond() - start.getEpochSecond();
             Logger.info("ApplicationTimer demo: Stopping application at " + clock.instant() + " after " + runningTime + "s.");

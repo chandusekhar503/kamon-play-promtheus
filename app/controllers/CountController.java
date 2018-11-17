@@ -1,10 +1,14 @@
 package controllers;
 
 import javax.inject.*;
-import play.*;
+
 import play.mvc.*;
 
+import services.CountService;
 import services.Counter;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 /**
  * This controller demonstrates how to use dependency injection to
@@ -17,9 +21,12 @@ public class CountController extends Controller {
 
     private final Counter counter;
 
+    private final CountService countService;
+
     @Inject
-    public CountController(Counter counter) {
+    public CountController(Counter counter, CountService countService) {
        this.counter = counter;
+        this.countService = countService;
     }
 
     /**
@@ -28,8 +35,13 @@ public class CountController extends Controller {
      * <code>GET</code> requests with a path of <code>/count</code>
      * requests by an entry in the <code>routes</code> config file.
      */
-    public Result count() {
-        return ok(Integer.toString(counter.nextCount()));
+    public CompletionStage<Result> count() {
+
+        return countService.getCount(counter.nextCount()).thenApply(response ->{
+            return ok(Integer.toString(response));
+        });
+
+        //return ok(Integer.toString(counter.nextCount()));
     }
 
 }

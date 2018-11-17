@@ -1,5 +1,7 @@
 package controllers;
 
+import kamon.Kamon;
+import kamon.prometheus.PrometheusReporter;
 import play.mvc.*;
 
 import views.html.*;
@@ -17,6 +19,7 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
+        Kamon.counter("hello.kamon").increment();
         return ok(index.render("Your new application is ready."));
     }
 

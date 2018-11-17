@@ -13,8 +13,8 @@ addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.6")
 addSbtPlugin("com.typesafe.sbt" % "sbt-play-enhancer" % "1.1.0")
 
 
+
 resolvers += Resolver.bintrayIvyRepo("kamon-io", "sbt-plugins")
 addSbtPlugin("io.kamon" % "sbt-aspectj-play-runner" % "1.0.4")
 
-
-addSbtPlugin("com.lightbend.sbt" % "sbt-javaagent" % "0.1.4")
+//addSbtPlugin("com.lightbend.sbt" % "sbt-javaagent" % "0.1.4")
