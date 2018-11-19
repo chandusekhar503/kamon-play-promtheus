@@ -26,7 +26,7 @@ public class CountController extends Controller {
     @Inject
     public CountController(Counter counter, CountService countService) {
        this.counter = counter;
-        this.countService = countService;
+       this.countService = countService;
     }
 
     /**
@@ -35,9 +35,16 @@ public class CountController extends Controller {
      * <code>GET</code> requests with a path of <code>/count</code>
      * requests by an entry in the <code>routes</code> config file.
      */
-    public CompletionStage<Result> count() {
-
+   // public Result count() {
+    public CompletionStage<Result> count(){
+        System.out.println("Inside  count....: Thread Id "+ Thread.currentThread().getId());
         return countService.getCount(counter.nextCount()).thenApply(response ->{
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(" : Thread Id: "+ Thread.currentThread().getId());
             return ok(Integer.toString(response));
         });
 
