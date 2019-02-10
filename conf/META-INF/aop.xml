@@ -2,8 +2,7 @@
 
 <aspectj>
     <aspects>
-        <aspect name="kamon.play.instrumentation.RequestHandlerInstrumentation"/>
-        <aspect name="kamon.play.instrumentation.WSInstrumentation"/>
+        <!--<aspect name="kamon.custom.instrumentation.CustomInstrumentation"/>-->
         <aspect name="kamon.custom.instrumentation.MethodLevelInstrumentation"/>
     </aspects>
 

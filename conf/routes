@@ -15,3 +15,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 #GET     /automatically-named-trace       controllers.KamonPlayExample.automaticallyNamedTrace
 #GET     /named-trace                     controllers.KamonPlayExample.namedTrace
+
+POST     /saveuser                    controllers.UserController.saveUser
+GET     /getuser                      controllers.UserController.getUser
+GET     /deleteuser                    controllers.UserController.deleteUser
